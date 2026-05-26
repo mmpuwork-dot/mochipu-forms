@@ -4,14 +4,16 @@ export const issueSchema = z.object({
   location: z.enum(['face', 'hair', 'body', 'physics', 'toggle', 'other']),
   type: z.enum(['model_error', 'change_artwork', 'adjust_physics', 'add_remove', 'other']),
   priority: z.enum(['high', 'medium', 'low']),
-  expected: z.string().max(500).optional(),
-  current_state: z.string().max(500).optional(),
-  reference_url: z.string().url().optional().or(z.literal('')),
+  // Accept null alongside undefined for nullable text fields — JSON
+  // clients commonly emit null for cleared inputs.
+  expected: z.string().max(500).nullable().optional(),
+  current_state: z.string().max(500).nullable().optional(),
+  reference_url: z.string().url().nullable().optional().or(z.literal('')),
   reference_files: z.array(z.object({
     url: z.string().url(),
     name: z.string(),
     size: z.number(),
-  })).optional(),
+  })).nullable().optional(),
 });
 
 export const feedbackSchema = z.object({

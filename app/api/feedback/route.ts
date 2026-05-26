@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { feedbackSchema } from '@/lib/validations/feedback';
 import { createServerSupabase } from '@/lib/supabase/server';
 import { sendFeedbackEmails } from '@/lib/email/client';
+import { getCloudflareContext } from '@opennextjs/cloudflare';
 
 export const runtime = 'nodejs';
 
@@ -50,10 +51,19 @@ export async function POST(req: NextRequest) {
 
     if (issuesError) throw issuesError;
 
-    // 3. Send emails (non-blocking — don't delay response)
-    sendFeedbackEmails(submission, issues ?? []).catch((err) =>
+    // 3. Send emails — register with ctx.waitUntil so the Worker isolate
+    //    isn't terminated before the Resend fetch completes. Failing here
+    //    must NOT block the response: the row is already in Supabase.
+    const emailPromise = sendFeedbackEmails(submission, issues ?? []).catch((err) =>
       console.error('[email] sendFeedbackEmails failed:', err),
     );
+    try {
+      const { ctx } = getCloudflareContext();
+      ctx.waitUntil(emailPromise);
+    } catch {
+      // Outside Cloudflare runtime (e.g. local `next dev`) — just let the
+      // promise resolve in-process.
+    }
 
     return NextResponse.json({ success: true, id: submission.id, access_token: submission.access_token });
 

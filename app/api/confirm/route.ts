@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { confirmSchema } from '@/lib/validations/confirm';
 import { createServerSupabase } from '@/lib/supabase/server';
 import { sendConfirmationEmails } from '@/lib/email/client';
+import { getCloudflareContext } from '@opennextjs/cloudflare';
 
 export const runtime = 'nodejs';
 
@@ -30,10 +31,17 @@ export async function POST(req: NextRequest) {
 
     if (error) throw error;
 
-    // 2. Send emails (non-blocking)
-    sendConfirmationEmails(confirmation).catch((err) =>
+    // 2. Send emails — keep the Worker isolate alive via ctx.waitUntil so
+    //    the Resend fetch completes after the response is sent.
+    const emailPromise = sendConfirmationEmails(confirmation).catch((err) =>
       console.error('[email] sendConfirmationEmails failed:', err),
     );
+    try {
+      const { ctx } = getCloudflareContext();
+      ctx.waitUntil(emailPromise);
+    } catch {
+      // Outside Cloudflare runtime — let the promise resolve in-process.
+    }
 
     return NextResponse.json({ success: true, id: confirmation.id, access_token: confirmation.access_token });
 

@@ -33,8 +33,9 @@ export async function GET(req: NextRequest, { params }: Context) {
 
   const reportUrl = buildReportInternalUrl(req.nextUrl.origin, locale, 'confirm', id, token, mode);
 
-  const browser = await launchBrowser();
+  let browser: Awaited<ReturnType<typeof launchBrowser>> | undefined;
   try {
+    browser = await launchBrowser();
     const page = await browser.newPage();
     await page.setViewport({ width: 860, height: 1100 });
     await page.goto(reportUrl, { waitUntil: 'domcontentloaded', timeout: 60_000 });
@@ -58,9 +59,13 @@ export async function GET(req: NextRequest, { params }: Context) {
       },
     });
   } catch (err) {
-    console.error('[pdf/confirm]', err);
-    return new NextResponse('PDF generation failed', { status: 500 });
+    const e = err as Error;
+    console.error('[pdf/confirm] failed:', e?.message, e?.stack);
+    return new NextResponse(
+      `PDF generation failed:\n\n${e?.name ?? 'Error'}: ${e?.message}\n\n${e?.stack ?? ''}`,
+      { status: 500, headers: { 'Content-Type': 'text/plain; charset=utf-8' } },
+    );
   } finally {
-    await browser.close();
+    if (browser) await browser.close().catch(() => {});
   }
 }

@@ -31,19 +31,18 @@ export async function GET(req: NextRequest, { params }: Context) {
 
   if (error || !data) return new NextResponse('Not found', { status: 404 });
 
-  // Always use request origin (not NEXT_PUBLIC_SITE_URL) — Puppeteer runs on the
-  // same host as the Next.js server, so it should fetch via the local origin.
   const reportUrl = buildReportInternalUrl(req.nextUrl.origin, locale, 'feedback', id, token, mode);
 
-  const browser = await launchBrowser();
+  // Wrap the entire flow so launchBrowser failures also get reported with a
+  // useful body. Browser will only be defined if launch succeeded.
+  let browser: Awaited<ReturnType<typeof launchBrowser>> | undefined;
   try {
+    browser = await launchBrowser();
     const page = await browser.newPage();
     await page.setViewport({ width: 860, height: 1100 });
     await page.goto(reportUrl, { waitUntil: 'domcontentloaded', timeout: 60_000 });
-    // Wait until React signals the translation has resolved (or is unneeded).
     await page.waitForSelector('[data-report-ready="true"]', { timeout: 60_000 });
     await page.evaluateHandle('document.fonts.ready');
-    // Final paint settle.
     await new Promise((r) => setTimeout(r, 400));
 
     const pdfBuffer = await page.pdf({
@@ -52,12 +51,7 @@ export async function GET(req: NextRequest, { params }: Context) {
       margin: { top: '0', right: '0', bottom: '0', left: '0' },
     });
 
-    const filename = buildFilename(
-      'feedback',
-      data.commission_name,
-      data.feedback_round,
-      mode,
-    );
+    const filename = buildFilename('feedback', data.commission_name, data.feedback_round, mode);
 
     return new NextResponse(new Uint8Array(pdfBuffer), {
       headers: {
@@ -67,9 +61,15 @@ export async function GET(req: NextRequest, { params }: Context) {
       },
     });
   } catch (err) {
-    console.error('[pdf/feedback]', err);
-    return new NextResponse('PDF generation failed', { status: 500 });
+    const e = err as Error;
+    console.error('[pdf/feedback] failed:', e?.message, e?.stack);
+    // TEMP: surface the error in the response body so we can debug in the
+    // browser without needing the Cloudflare logs UI. Remove after diagnosis.
+    return new NextResponse(
+      `PDF generation failed:\n\n${e?.name ?? 'Error'}: ${e?.message}\n\n${e?.stack ?? ''}`,
+      { status: 500, headers: { 'Content-Type': 'text/plain; charset=utf-8' } },
+    );
   } finally {
-    await browser.close();
+    if (browser) await browser.close().catch(() => {});
   }
 }

@@ -1,21 +1,29 @@
-// PDF generation uses @cloudflare/puppeteer with the `BROWSER` binding
-// provided by Cloudflare Browser Rendering. Bindings are accessed via
-// `getCloudflareContext` from @opennextjs/cloudflare.
-
-import type { Browser } from '@cloudflare/puppeteer';
+import puppeteer, { type Browser } from '@cloudflare/puppeteer';
+import { getCloudflareContext } from '@opennextjs/cloudflare';
 
 export async function launchBrowser(): Promise<Browser> {
-  const { getCloudflareContext } = await import('@opennextjs/cloudflare');
-  const ctx = await getCloudflareContext({ async: true });
+  console.log('[pdf/launchBrowser] step 1: getCloudflareContext');
+  let ctx: ReturnType<typeof getCloudflareContext> | undefined;
+  try {
+    ctx = getCloudflareContext();
+  } catch (err) {
+    console.error('[pdf/launchBrowser] getCloudflareContext threw', err);
+    throw new Error(`getCloudflareContext failed: ${(err as Error).message}`);
+  }
+
   const env = ctx?.env as { BROWSER?: unknown } | undefined;
+  console.log('[pdf/launchBrowser] step 2: env present?', !!env, 'BROWSER present?', !!env?.BROWSER);
   if (!env?.BROWSER) {
     throw new Error(
-      'Cloudflare Browser Rendering binding "BROWSER" not configured. ' +
-        'Add the binding in the Worker settings, then redeploy.',
+      'Cloudflare Browser Rendering binding "BROWSER" not configured on this Worker. ' +
+        'Add the binding via wrangler.toml then redeploy.',
     );
   }
-  const cfp = (await import('@cloudflare/puppeteer')).default;
-  return cfp.launch(env.BROWSER as never);
+
+  console.log('[pdf/launchBrowser] step 3: puppeteer.launch');
+  const browser = await puppeteer.launch(env.BROWSER as never);
+  console.log('[pdf/launchBrowser] step 4: launched OK');
+  return browser;
 }
 
 // ── Shared URL / filename / mode helpers ─────────────────────────────────────

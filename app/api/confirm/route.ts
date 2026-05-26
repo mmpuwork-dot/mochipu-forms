@@ -4,7 +4,7 @@ import { confirmSchema } from '@/lib/validations/confirm';
 import { createServerSupabase } from '@/lib/supabase/server';
 import { sendConfirmationEmails } from '@/lib/email/client';
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';
 
 export async function POST(req: NextRequest) {
   try {

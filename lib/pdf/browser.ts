@@ -1,18 +1,17 @@
-// PDF generation runs on the Edge runtime, so we can't load puppeteer-core
-// (it depends on Node APIs like fs / child_process). On Cloudflare Pages we
-// use @cloudflare/puppeteer with the `BROWSER` binding provided by Browser
-// Rendering. Both imports below are dynamic so this module stays edge-safe.
+// PDF generation uses @cloudflare/puppeteer with the `BROWSER` binding
+// provided by Cloudflare Browser Rendering. Bindings are accessed via
+// `getCloudflareContext` from @opennextjs/cloudflare.
 
 import type { Browser } from '@cloudflare/puppeteer';
 
 export async function launchBrowser(): Promise<Browser> {
-  const { getRequestContext } = await import('@cloudflare/next-on-pages');
-  const ctx = getRequestContext();
+  const { getCloudflareContext } = await import('@opennextjs/cloudflare');
+  const ctx = await getCloudflareContext({ async: true });
   const env = ctx?.env as { BROWSER?: unknown } | undefined;
   if (!env?.BROWSER) {
     throw new Error(
       'Cloudflare Browser Rendering binding "BROWSER" not configured. ' +
-        'Add the binding in the Pages project settings, then redeploy.',
+        'Add the binding in the Worker settings, then redeploy.',
     );
   }
   const cfp = (await import('@cloudflare/puppeteer')).default;

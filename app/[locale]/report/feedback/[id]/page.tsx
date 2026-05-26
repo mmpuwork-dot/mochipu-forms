@@ -4,7 +4,7 @@ import { ReportClientWrapper } from '@/components/report/ReportClientWrapper';
 import { ReportToolbar } from '@/components/report/ReportToolbar';
 import type { DisplayMode, FeedbackReportData } from '@/components/report/types';
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';
 
 interface Props {
   params: Promise<{ locale: string; id: string }>;

@@ -1,7 +1,11 @@
 name = "mochipu-forms"
+main = ".open-next/worker.js"
 compatibility_date = "2025-05-01"
-compatibility_flags = ["nodejs_compat"]
-pages_build_output_dir = ".vercel/output/static"
+compatibility_flags = ["nodejs_compat", "global_fetch_strictly_public"]
+
+[assets]
+directory = ".open-next/assets"
+binding = "ASSETS"
 
 # Cloudflare Browser Rendering binding — requires Workers Paid plan ($5/mo).
 # Used by /report/{kind}/[id]/pdf routes to render the report HTML to PDF.

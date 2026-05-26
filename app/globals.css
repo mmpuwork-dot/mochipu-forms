@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+:root {
+  /* ── Semantic ink & surface ── */
+  --color-ink: #1A1525;
+  --color-ink-soft: #2C2540;
+  --color-purple: #6B5FA0;
+  --color-purple-soft: #5D5470;
+  --color-purple-mute: #A89FC2;
+
+  /* ── Backgrounds ── */
+  --color-bg-page: #F4F2F7;
+  --color-bg-surface: #FBFAFD;
+  --color-bg-input: #FFFFFF;
+
+  /* ── Borders ── */
+  --color-border-faint: #EBE6F2;
+  --color-border-light: #D9D2E8;
+  --color-border-mid: #C9C0DD;
+
+  /* ── Accent (blue) ── */
+  --color-accent: #5A8BBF;
+  --color-accent-bg: #EAF2FA;
+  --color-accent-border: #B8D9F0;
+
+  /* ── Priority ── */
+  --color-required: #C04A6A;
+
+  --color-high: var(--color-required);
+  --color-high-bg: #F8E4E4;
+  --color-high-border: #D88C8C;
+  --color-high-text: #791F1F;
+
+  --color-medium: #E0A14A;
+  --color-medium-bg: #FBEFD9;
+  --color-medium-text: #7A4D08;
+
+  --color-low: #6FA94A;
+  --color-low-bg: #EDF4E6;
+  --color-low-border: #B8D198;
+  --color-low-text: #4A6B2A;
+
+  /* ── Legacy aliases (backward compat) ── */
+  --color-black: var(--color-ink);
+  --color-white: var(--color-bg-surface);
+  --color-bg: var(--color-bg-page);
+  --color-text-secondary: var(--color-purple-soft);
+  --color-text-tertiary: var(--color-purple-mute);
+  --color-accent-blue: var(--color-accent);
+
+  /* ── Section spacing — apply uniformly across ALL form layouts (en/ja/zh) ── */
+  --space-section: 1.5rem;    /* 24px — between major sub-sections inside a card   */
+  --space-group:   0.75rem;   /* 12px — between a section label and its content    */
+  --space-tight:   0.375rem;  /* 6px  — between a sub-label and its input field    */
+
+  /* ── Typography ── */
+  --font-sans: 'Inter', 'Noto Sans JP', 'Noto Sans TC', system-ui, sans-serif;
+}
+
+@theme inline {
+  --color-background: var(--color-bg);
+  --color-foreground: var(--color-black);
+  --font-sans: var(--font-sans);
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-black);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  border-radius: 0 !important;
+}
+
+@media print {
+  .no-print { display: none !important; }
+}

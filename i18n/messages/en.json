@@ -1,0 +1,122 @@
+{
+  "feedback": {
+    "title": "Model Feedback.",
+    "subtitle": "Thank you for reviewing your model! Please list each item you'd like adjusted.",
+    "scopeNotice": {
+      "label": "Scope Notice",
+      "content": "Minor error fixes and physics tweaks are included in the original commission. Changes to the artwork or additions may incur extra fees. If you're unsure, go ahead and submit — I'll confirm with you before charging anything.",
+      "requiredHint": "Required field"
+    },
+    "section": {
+      "basic": "Basic Info",
+      "issue": "Issue {n}"
+    },
+    "field": {
+      "commissionName": "Commission Name",
+      "email": "Email",
+      "feedbackRound": "Which round of feedback is this?",
+      "location": "Where's the issue?",
+      "type": "Type of issue",
+      "priority": "Priority",
+      "description": "Description",
+      "expected": "Expected",
+      "current": "Current State",
+      "reference": "Reference Files",
+      "referenceOptional": "Optional",
+      "cloudLink": "Or share a cloud link"
+    },
+    "placeholder": {
+      "commissionName": "Your character or nickname",
+      "email": "you@example.com",
+      "expectedExample": "e.g. I'd like both eyes to close completely when blinking, like in the demo at 0:20.",
+      "currentExample": "e.g. The right eye stays slightly open during blink, visible at 0:14 in the demo.",
+      "uploadHint": "Drag files here, or <browse>browse</browse>",
+      "uploadSpec": "Supports images, videos, and PSD · 20MB max per file",
+      "urlInput": "https://drive.google.com/... · YouTube · Dropbox etc.",
+      "urlHint": "For large files, share a cloud link instead"
+    },
+    "location": {
+      "face": "Face",
+      "hair": "Hair",
+      "body": "Body",
+      "physics": "Physics",
+      "toggle": "Toggle",
+      "other": "Other"
+    },
+    "type": {
+      "model_error": "Model Error",
+      "change_artwork": "Change Artwork",
+      "adjust_physics": "Adjust Physics / Motion",
+      "add_remove": "Add / Remove",
+      "other": "Other"
+    },
+    "priority": {
+      "high": "High",
+      "medium": "Medium",
+      "low": "Low"
+    },
+    "action": {
+      "addIssue": "+ Add another item",
+      "collapse": "Collapse",
+      "expand": "Expand",
+      "remove": "Remove",
+      "submit": "Submit Feedback",
+      "noIssues": "Nothing to fix? → Go to Delivery Confirmation"
+    },
+    "titleHint": "A title will be generated from your description"
+  },
+  "confirm": {
+    "title": "Delivery Confirmation.",
+    "subtitle": "Thank you for trusting me with this commission — let's wrap things up together.",
+    "warning": {
+      "label": "Please Read Before Confirming",
+      "main": "By submitting this form, you confirm that <strong>this commission is complete</strong>. The final files have been delivered and reviewed.",
+      "future": "Any future changes, updates, or additions will be treated as <strong>a new commission</strong> — feel free to reach out by email anytime.",
+      "requiredHint": "Required field"
+    },
+    "section": {
+      "basic": "Basic Info",
+      "debutDate": "Debut Date",
+      "message": "Message"
+    },
+    "field": {
+      "dateOptional": "Optional — let me know if you have a date in mind.",
+      "dateDecided": "I have a date in mind",
+      "dateUndecided": "Not decided yet",
+      "selectDate": "Select a date",
+      "selectedDate": "Selected: ",
+      "messageOptional": "Optional — anything you'd like to share.",
+      "messagePlaceholder": "Impressions, thoughts, ideas for future commissions... all welcome."
+    },
+    "checkbox": {
+      "label": "I confirm this commission is complete",
+      "description": "I've reviewed the final model and approve the delivery. I understand that any future changes will be handled as a new commission."
+    },
+    "action": {
+      "back": "← Back to Feedback",
+      "submit": "Confirm Delivery"
+    }
+  },
+  "success": {
+    "feedback": {
+      "label": "Feedback Received",
+      "title": "Thank you, {name}.",
+      "message": "I've received your {count} feedback items. I'll review everything carefully and get back to you in a few days.",
+      "summaryLabel": "Submission Summary"
+    },
+    "confirm": {
+      "label": "Commission Complete",
+      "title": "Congratulations on your new model.",
+      "message": "Thank you for trusting me with this commission. It's been a pleasure working with you — I can't wait to see this character brought to life.",
+      "debutLabel": "Debut date noted",
+      "debutNote": "I'll be cheering you on that day! If you'd like, feel free to tag me when you debut — I'd love to share the moment.",
+      "emailNote": "A copy of this confirmation has been sent to your email.",
+      "futureNote": "For any future commissions, feel free to reach out at <b>{email}</b>.",
+      "snsNote": "Follow <b>{handle}</b> for more of my work."
+    }
+  },
+  "common": {
+    "required": "*",
+    "or": "or"
+  }
+}

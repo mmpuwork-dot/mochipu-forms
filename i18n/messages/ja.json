@@ -1,0 +1,122 @@
+{
+  "feedback": {
+    "title": "モデルフィードバック。",
+    "subtitle": "モデルをご確認いただきありがとうございます。修正が必要な箇所を一つずつお知らせください。",
+    "scopeNotice": {
+      "label": "修正範囲について",
+      "content": "軽微なエラー修正や物理演算の微調整は、元のご依頼内容に含まれております。原画の変更や追加要素については、別途料金が発生する場合がございます。ご不明な場合はそのままご送信ください。請求前に必ずご相談いたします。",
+      "requiredHint": "は必須項目です"
+    },
+    "section": {
+      "basic": "基本情報",
+      "issue": "項目 {n}"
+    },
+    "field": {
+      "commissionName": "ご依頼名",
+      "email": "メールアドレス",
+      "feedbackRound": "これは何回目のフィードバックですか？",
+      "location": "気になる箇所",
+      "type": "問題の種類",
+      "priority": "優先度",
+      "description": "説明",
+      "expected": "理想の状態",
+      "current": "現在の状態",
+      "reference": "参考ファイル",
+      "referenceOptional": "任意",
+      "cloudLink": "または、クラウドリンクで共有"
+    },
+    "placeholder": {
+      "commissionName": "キャラクター名 または ニックネーム",
+      "email": "you@example.com",
+      "expectedExample": "例：まばたきの際、両目をしっかり閉じてほしいです。デモの0:20のような感じで。",
+      "currentExample": "例：まばたきの時、右目が少し開いたまま。デモ動画の0:14あたりで見えます。",
+      "uploadHint": "ファイルをドラッグ、または<browse>選択</browse>",
+      "uploadSpec": "画像・動画・PSD 対応 · 1ファイル最大 20MB",
+      "urlInput": "https://drive.google.com/... · YouTube · Dropbox など",
+      "urlHint": "大きなファイルはクラウドリンクをご利用ください"
+    },
+    "location": {
+      "face": "顔",
+      "hair": "髪",
+      "body": "体",
+      "physics": "物理演算",
+      "toggle": "切替",
+      "other": "その他"
+    },
+    "type": {
+      "model_error": "モデルの不具合",
+      "change_artwork": "原画の変更",
+      "adjust_physics": "物理・動きの調整",
+      "add_remove": "追加・削除",
+      "other": "その他"
+    },
+    "priority": {
+      "high": "高",
+      "medium": "中",
+      "low": "低"
+    },
+    "action": {
+      "addIssue": "+ 項目を追加",
+      "collapse": "折りたたむ",
+      "expand": "開く",
+      "remove": "削除",
+      "submit": "フィードバックを送信",
+      "noIssues": "問題がない場合 → 納品確認へ"
+    },
+    "titleHint": "説明文からタイトルが自動的に生成されます"
+  },
+  "confirm": {
+    "title": "納品確認。",
+    "subtitle": "このたびはご依頼いただき、誠にありがとうございました。最後の確認を一緒にいたしましょう。",
+    "warning": {
+      "label": "確認前にお読みください",
+      "main": "このフォームをご送信いただくことで、<strong>今回のご依頼が完了した</strong>ものと確認させていただきます。最終ファイルは納品済みで、ご確認いただいたものとみなします。",
+      "future": "今後の変更・アップデート・追加は<strong>新しいご依頼</strong>として承ります。いつでもメールにてお気軽にご相談くださいませ。",
+      "requiredHint": "は必須項目です"
+    },
+    "section": {
+      "basic": "基本情報",
+      "debutDate": "デビュー予定日",
+      "message": "メッセージ"
+    },
+    "field": {
+      "dateOptional": "任意 — 予定日が決まっている場合はお知らせください。",
+      "dateDecided": "日程が決まっています",
+      "dateUndecided": "まだ決まっていません",
+      "selectDate": "日付を選択",
+      "selectedDate": "選択中：",
+      "messageOptional": "任意 — 何かあればお気軽にどうぞ。",
+      "messagePlaceholder": "感想、ご意見、今後のご依頼についてなど、何でもお聞かせください。"
+    },
+    "checkbox": {
+      "label": "今回のご依頼が完了したことを確認いたします",
+      "description": "最終モデルを確認のうえ、納品を承認いたします。今後の変更や更新は新しいご依頼として対応されることを理解しております。"
+    },
+    "action": {
+      "back": "← フィードバックに戻る",
+      "submit": "納品を確認する"
+    }
+  },
+  "success": {
+    "feedback": {
+      "label": "フィードバック受領",
+      "title": "{name}様、ありがとうございます。",
+      "message": "{count} 件のフィードバックを受領いたしました。丁寧に確認のうえ、数日以内にご連絡いたします。",
+      "summaryLabel": "送信内容"
+    },
+    "confirm": {
+      "label": "ご依頼完了",
+      "title": "新しいモデル、おめでとうございます。",
+      "message": "このたびはご依頼いただき、誠にありがとうございました。一緒にお仕事できて光栄でございました。このキャラクターが生き生きと動き出す姿を楽しみにしております。",
+      "debutLabel": "デビュー日を記録いたしました",
+      "debutNote": "その日は応援しております。もしよろしければ、デビュー時にタグ付けしていただけますと嬉しく存じます — ぜひ一緒にお祝いさせてくださいませ。",
+      "emailNote": "確認メールをご登録のアドレスにお送りいたしました。",
+      "futureNote": "今後のご依頼は <b>{email}</b> までお気軽にどうぞ。",
+      "snsNote": "作品をもっと見たい方は、<b>{handle}</b> をフォローしてくださいませ。"
+    }
+  },
+  "common": {
+    "required": "*",
+    "or": "または"
+  }
+}

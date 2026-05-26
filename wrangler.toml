@@ -1,0 +1,8 @@
+name = "mochipu-forms"
+compatibility_date = "2025-05-01"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = ".vercel/output/static"
+
+# Cloudflare Browser Rendering binding — requires Workers Paid plan ($5/mo).
+# Used by /report/{kind}/[id]/pdf routes to render the report HTML to PDF.
+browser = { binding = "BROWSER" }

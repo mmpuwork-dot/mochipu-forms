@@ -1,0 +1,122 @@
+{
+  "feedback": {
+    "title": "模型反饋。",
+    "subtitle": "感謝您檢查模型！請逐項告訴我需要調整的地方。",
+    "scopeNotice": {
+      "label": "修改說明",
+      "content": "小幅度錯誤修正與物理微調包含在原本的委託內。若涉及原畫改動或新增內容，可能會酌收費用。如果不確定，請直接提交，我會在收費前先與您確認。",
+      "requiredHint": "為必填欄位"
+    },
+    "section": {
+      "basic": "基本資訊",
+      "issue": "{n} 問題"
+    },
+    "field": {
+      "commissionName": "委託名",
+      "email": "電子信箱",
+      "feedbackRound": "這是第幾次反饋這個專案？",
+      "location": "問題位置",
+      "type": "問題類型",
+      "priority": "優先順序",
+      "description": "問題描述",
+      "expected": "期望效果",
+      "current": "目前狀況",
+      "reference": "參考檔案",
+      "referenceOptional": "選填",
+      "cloudLink": "或分享雲端連結"
+    },
+    "placeholder": {
+      "commissionName": "角色名 或 暱稱",
+      "email": "you@example.com",
+      "expectedExample": "例：希望眨眼時雙眼能完全閉合，類似 demo 0:20 的效果。",
+      "currentExample": "例：眨眼時右眼會微微張開，可見於 demo 影片 0:14。",
+      "uploadHint": "拖曳檔案至此，或<browse>瀏覽</browse>",
+      "uploadSpec": "支援圖片、影片、PSD 檔 · 單檔上限 20MB",
+      "urlInput": "https://drive.google.com/... · YouTube · Dropbox 等",
+      "urlHint": "檔案太大時，請使用雲端連結分享"
+    },
+    "location": {
+      "face": "臉部",
+      "hair": "頭髮",
+      "body": "身體",
+      "physics": "物理",
+      "toggle": "切換",
+      "other": "其他"
+    },
+    "type": {
+      "model_error": "模型錯誤",
+      "change_artwork": "原畫修改",
+      "adjust_physics": "物理或動作調整",
+      "add_remove": "新增或移除",
+      "other": "其他"
+    },
+    "priority": {
+      "high": "高",
+      "medium": "中",
+      "low": "低"
+    },
+    "action": {
+      "addIssue": "+ 新增另一個問題",
+      "collapse": "收起",
+      "expand": "展開",
+      "remove": "移除",
+      "submit": "送出反饋",
+      "noIssues": "沒有問題 → 前往收貨確認"
+    },
+    "titleHint": "系統會根據您的描述自動生成標題"
+  },
+  "confirm": {
+    "title": "收貨確認。",
+    "subtitle": "感謝您信任我完成這次委託 — 讓我們一起為這個專案畫上完美的句點。",
+    "warning": {
+      "label": "確認前請閱讀",
+      "main": "提交此表單，即代表您確認 <strong>本次委託已完成</strong>。最終檔案已交付並通過您的審核。",
+      "future": "未來任何修改、更新或新增功能，將視為 <strong>新的委託</strong> — 歡迎隨時透過電子郵件聯絡我，我們可以再次討論。",
+      "requiredHint": "為必填欄位"
+    },
+    "section": {
+      "basic": "基本資訊",
+      "debutDate": "預估出道日",
+      "message": "附加留言"
+    },
+    "field": {
+      "dateOptional": "選填 — 如果您已經有規劃的日期，可以告訴我。",
+      "dateDecided": "已有規劃日期",
+      "dateUndecided": "尚未決定",
+      "selectDate": "選擇日期",
+      "selectedDate": "已選擇：",
+      "messageOptional": "選填 — 任何想分享的話都可以寫在這裡。",
+      "messagePlaceholder": "感想、心得、未來合作的想法⋯ 都歡迎告訴我。"
+    },
+    "checkbox": {
+      "label": "我確認本次委託已完成",
+      "description": "我已檢查最終模型並通過交付。我了解未來任何修改或更新將以新的委託方式進行。"
+    },
+    "action": {
+      "back": "← 返回反饋表單",
+      "submit": "確認收貨"
+    }
+  },
+  "success": {
+    "feedback": {
+      "label": "已收到反饋",
+      "title": "謝謝您，{name}。",
+      "message": "已收到您的 {count} 個反饋項目。我會仔細檢視，並在數日內回覆您下一步的進度。",
+      "summaryLabel": "提交摘要"
+    },
+    "confirm": {
+      "label": "委託完成",
+      "title": "恭喜您擁有新模型。",
+      "message": "感謝您信任我完成這次委託。能與您合作真的非常開心 — 期待看見這個角色因您而活起來。",
+      "debutLabel": "已記錄出道日",
+      "debutNote": "我會在那天為您加油的！如果方便，出道時 tag 我一下 — 我會很開心幫您分享這個時刻。",
+      "emailNote": "確認副本已寄送至您的信箱。",
+      "futureNote": "未來如有任何新的委託，歡迎直接寄信至 <b>{email}</b>。",
+      "snsNote": "想看更多作品歡迎追蹤 <b>{handle}</b>。"
+    }
+  },
+  "common": {
+    "required": "*",
+    "or": "或"
+  }
+}

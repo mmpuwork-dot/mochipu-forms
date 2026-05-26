@@ -7,8 +7,7 @@ import {
   normalizeMode,
 } from '@/lib/pdf/browser';
 
-export const runtime = 'nodejs';
-export const maxDuration = 30;
+export const runtime = 'edge';
 
 interface Context {
   params: Promise<{ locale: string; id: string }>;

@@ -7,7 +7,6 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true, // required for Cloudflare Pages
   },
-  serverExternalPackages: ['puppeteer-core', '@sparticuz/chromium'],
 };
 
 export default withNextIntl(nextConfig);

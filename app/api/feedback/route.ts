@@ -4,7 +4,7 @@ import { feedbackSchema } from '@/lib/validations/feedback';
 import { createServerSupabase } from '@/lib/supabase/server';
 import { sendFeedbackEmails } from '@/lib/email/client';
 
-export const runtime = 'nodejs';
+export const runtime = 'edge';
 
 export async function POST(req: NextRequest) {
   try {

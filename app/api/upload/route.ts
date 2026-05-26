@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createServerSupabase } from '@/lib/supabase/server';
 
-export const runtime = 'nodejs';
+export const runtime = 'edge';
 
 const BUCKET = 'feedback-files';
 const MAX_SIZE = 50 * 1024 * 1024; // 50 MB

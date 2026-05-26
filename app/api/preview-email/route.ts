@@ -5,7 +5,7 @@ import { render } from '@react-email/render';
 import FeedbackToMochipu from '@/lib/email/templates/FeedbackToMochipu';
 import ConfirmToMochipu  from '@/lib/email/templates/ConfirmToMochipu';
 
-export const runtime = 'nodejs';
+export const runtime = 'edge';
 
 // Dev-only helper. Renders the React Email templates as HTML so we can preview
 // without needing to actually send via Resend. Mounts mock data.

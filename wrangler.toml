@@ -3,6 +3,12 @@ main = ".open-next/worker.js"
 compatibility_date = "2025-05-01"
 compatibility_flags = ["nodejs_compat", "global_fetch_strictly_public"]
 
+# Collect logs from every Worker invocation so we can debug production
+# issues. Free Workers Observability includes 200k events/month.
+[observability]
+enabled = true
+head_sampling_rate = 1
+
 # Cloudflare Browser Rendering binding — requires Workers Paid plan ($5/mo).
 # Used by /report/{kind}/[id]/pdf routes to render the report HTML to PDF.
 # IMPORTANT: keep this BEFORE the [assets] table header or it will be parsed

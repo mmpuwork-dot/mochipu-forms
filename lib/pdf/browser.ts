@@ -1,32 +1,19 @@
 import puppeteer, { type Browser } from '@cloudflare/puppeteer';
 import { getCloudflareContext } from '@opennextjs/cloudflare';
 
+// PDF generation uses @cloudflare/puppeteer with the `BROWSER` binding
+// provided by Cloudflare Browser Rendering. Configured in wrangler.toml as
+// `browser = { binding = "BROWSER" }` (must be BEFORE any [section] header
+// or TOML parses it as a sub-field of the previous section).
 export async function launchBrowser(): Promise<Browser> {
-  console.log('[pdf/launchBrowser] step 1: getCloudflareContext');
-  let ctx: ReturnType<typeof getCloudflareContext> | undefined;
-  try {
-    ctx = getCloudflareContext();
-  } catch (err) {
-    console.error('[pdf/launchBrowser] getCloudflareContext threw', err);
-    throw new Error(`getCloudflareContext failed: ${(err as Error).message}`);
-  }
-
-  const env = ctx?.env as Record<string, unknown> | undefined;
-  const envKeys = env ? Object.keys(env) : null;
-  console.log('[pdf/launchBrowser] step 2: env present?', !!env, 'keys=', JSON.stringify(envKeys));
-  console.log('[pdf/launchBrowser] step 2b: BROWSER present?', !!env?.BROWSER, 'typeof=', typeof env?.BROWSER);
-
+  const ctx = getCloudflareContext();
+  const env = ctx?.env as { BROWSER?: unknown } | undefined;
   if (!env?.BROWSER) {
     throw new Error(
-      `Cloudflare Browser Rendering binding "BROWSER" not in getCloudflareContext().env. ` +
-        `env keys = ${JSON.stringify(envKeys)}`,
+      'Cloudflare Browser Rendering binding "BROWSER" not in getCloudflareContext().env',
     );
   }
-
-  console.log('[pdf/launchBrowser] step 3: puppeteer.launch');
-  const browser = await puppeteer.launch(env.BROWSER as never);
-  console.log('[pdf/launchBrowser] step 4: launched OK');
-  return browser;
+  return puppeteer.launch(env.BROWSER as never);
 }
 
 // ── Shared URL / filename / mode helpers ─────────────────────────────────────

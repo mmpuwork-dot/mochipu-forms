@@ -3,10 +3,22 @@ main = ".open-next/worker.js"
 compatibility_date = "2025-05-01"
 compatibility_flags = ["nodejs_compat", "global_fetch_strictly_public"]
 
+# Cloudflare Browser Rendering binding — requires Workers Paid plan ($5/mo).
+# Used by /report/{kind}/[id]/pdf routes to render the report HTML to PDF.
+# IMPORTANT: keep this BEFORE the [assets] table header or it will be parsed
+# as a sub-field of [assets] (TOML semantics) and silently ignored.
+browser = { binding = "BROWSER" }
+
 [assets]
 directory = ".open-next/assets"
 binding = "ASSETS"
 
-# Cloudflare Browser Rendering binding — requires Workers Paid plan ($5/mo).
-# Used by /report/{kind}/[id]/pdf routes to render the report HTML to PDF.
-browser = { binding = "BROWSER" }
+# Plain-text environment variables. Secrets (RESEND_API_KEY,
+# GOOGLE_TRANSLATE_API_KEY, SUPABASE_SERVICE_ROLE_KEY) are configured in the
+# Cloudflare Worker settings (not committed here) and survive deploys.
+[vars]
+NEXT_PUBLIC_SITE_URL          = "https://mochipu-forms.mmpu-work.workers.dev"
+NEXT_PUBLIC_SUPABASE_URL      = "https://dxkyjmaabaipvznwepzp.supabase.co"
+NEXT_PUBLIC_SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR4a3lqbWFhYmFpcHZ6bndlcHpwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk2Mjk4NzMsImV4cCI6MjA5NTIwNTg3M30.b0Cep94dmsrPjW_rsxhC-rxLqccyKFfODos0UVz3HnM"
+MOCHIPU_EMAIL                 = "mmpu.work@gmail.com"
+RESEND_FROM                   = "Mochipu Live2D <onboarding@resend.dev>"

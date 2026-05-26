@@ -15,7 +15,6 @@
     "@hookform/resolvers": "^5.4.0",
     "@react-email/components": "^1.0.12",
     "@react-email/render": "^2.0.8",
-    "@sparticuz/chromium": "^148.0.0",
     "@supabase/supabase-js": "^2.106.1",
     "@tabler/icons-react": "^3.44.0",
     "@uploadthing/react": "^7.3.3",

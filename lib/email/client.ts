@@ -8,9 +8,20 @@ import FeedbackToClient  from './templates/FeedbackToClient';
 import ConfirmToMochipu  from './templates/ConfirmToMochipu';
 import ConfirmToClient   from './templates/ConfirmToClient';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-const FROM   = process.env.RESEND_FROM ?? 'Mochipu Live2D <noreply@mochipuworks.com>';
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://forms.mochipuworks.com';
+// Lazy-init the Resend client so Next.js's `next build` can statically
+// analyse the API routes without RESEND_API_KEY being present (Cloudflare
+// only injects secrets at runtime, not at build time).
+let _resend: Resend | undefined;
+function getResend(): Resend {
+  if (_resend) return _resend;
+  const key = process.env.RESEND_API_KEY;
+  if (!key) throw new Error('RESEND_API_KEY is not set.');
+  _resend = new Resend(key);
+  return _resend;
+}
+
+const FROM       = process.env.RESEND_FROM ?? 'Mochipu Live2D <noreply@mochipuworks.com>';
+const SITE_URL   = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://forms.mochipuworks.com';
 const SNS_HANDLE = '@mochimochibubu';
 
 function formatSubmittedAt(dateStr: string): string {
@@ -59,7 +70,7 @@ export async function sendFeedbackEmails(
 
   await Promise.all([
     // 1. Notification to Mochipu — minimal, all detail lives in the linked PDF report
-    resend.emails.send({
+    getResend().emails.send({
       from: FROM,
       to: MOCHIPU_EMAIL,
       replyTo: submission.email,
@@ -85,7 +96,7 @@ export async function sendFeedbackEmails(
     }),
 
     // 2. Receipt to client — never includes report link (reports are private)
-    resend.emails.send({
+    getResend().emails.send({
       from: FROM,
       to: submission.email,
       subject:
@@ -110,7 +121,7 @@ export async function sendConfirmationEmails(confirmation: DeliveryConfirmation)
 
   await Promise.all([
     // 1. Notification to Mochipu
-    resend.emails.send({
+    getResend().emails.send({
       from: FROM,
       to: MOCHIPU_EMAIL,
       replyTo: confirmation.email,
@@ -129,7 +140,7 @@ export async function sendConfirmationEmails(confirmation: DeliveryConfirmation)
     }),
 
     // 2. Receipt to client — never includes report link
-    resend.emails.send({
+    getResend().emails.send({
       from: FROM,
       to: confirmation.email,
       subject:

@@ -11,12 +11,15 @@ export async function launchBrowser(): Promise<Browser> {
     throw new Error(`getCloudflareContext failed: ${(err as Error).message}`);
   }
 
-  const env = ctx?.env as { BROWSER?: unknown } | undefined;
-  console.log('[pdf/launchBrowser] step 2: env present?', !!env, 'BROWSER present?', !!env?.BROWSER);
+  const env = ctx?.env as Record<string, unknown> | undefined;
+  const envKeys = env ? Object.keys(env) : null;
+  console.log('[pdf/launchBrowser] step 2: env present?', !!env, 'keys=', JSON.stringify(envKeys));
+  console.log('[pdf/launchBrowser] step 2b: BROWSER present?', !!env?.BROWSER, 'typeof=', typeof env?.BROWSER);
+
   if (!env?.BROWSER) {
     throw new Error(
-      'Cloudflare Browser Rendering binding "BROWSER" not configured on this Worker. ' +
-        'Add the binding via wrangler.toml then redeploy.',
+      `Cloudflare Browser Rendering binding "BROWSER" not in getCloudflareContext().env. ` +
+        `env keys = ${JSON.stringify(envKeys)}`,
     );
   }
 

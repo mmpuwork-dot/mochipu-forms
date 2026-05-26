@@ -9,7 +9,6 @@ export interface ConfirmToClientProps {
   locale: 'en' | 'ja' | 'zh';
   debutDate?: string | null;
   mochipuEmail: string;
-  snsHandle: string;
 }
 
 // ─── i18n ────────────────────────────────────────────────
@@ -24,8 +23,6 @@ const T = {
     emailLabel: 'Confirmation sent to',
     futureLabel: 'Future commissions',
     futureNote: (email: string) => `Feel free to reach out at ${email} anytime.`,
-    snsLabel: 'Stay connected',
-    snsNote: (handle: string) => `Follow ${handle} for more of my work.`,
     footer: 'Mochipu Live2D · forms.mochipuworks.com',
   },
   ja: {
@@ -38,8 +35,6 @@ const T = {
     emailLabel: '確認メール送信先',
     futureLabel: '今後のご依頼',
     futureNote: (email: string) => `${email} までお気軽にどうぞ。`,
-    snsLabel: 'SNS',
-    snsNote: (handle: string) => `作品をもっと見たい方は ${handle} をフォローしてくださいませ。`,
     footer: 'Mochipu Live2D · forms.mochipuworks.com',
   },
   zh: {
@@ -52,8 +47,6 @@ const T = {
     emailLabel: '確認副本已寄送至',
     futureLabel: '未來委託',
     futureNote: (email: string) => `歡迎直接寄信至 ${email}。`,
-    snsLabel: '追蹤更多作品',
-    snsNote: (handle: string) => `追蹤 ${handle} 查看更多。`,
     footer: 'Mochipu Live2D · forms.mochipuworks.com',
   },
 };
@@ -92,7 +85,6 @@ export default function ConfirmToClient({
   locale,
   debutDate,
   mochipuEmail,
-  snsHandle,
 }: ConfirmToClientProps) {
   const t = T[locale];
   const isCJK = locale !== 'en';
@@ -204,19 +196,15 @@ export default function ConfirmToClient({
             </Section>
           )}
 
-          {/* ── Info rows ── */}
+          {/* ── Info row — keep only the mailto, no external social links
+              (Gmail's spam classifier on a new sender domain is sensitive
+              to twitter.com / promotional outbound links). ── */}
           <Section style={{ padding: '0 36px 32px' }}>
             <InfoRow
               label={t.futureLabel}
               value={t.futureNote(mochipuEmail)}
               isLink
               href={`mailto:${mochipuEmail}`}
-            />
-            <InfoRow
-              label={t.snsLabel}
-              value={t.snsNote(snsHandle)}
-              isLink
-              href={`https://twitter.com/${snsHandle.replace('@', '')}`}
             />
             <div style={{ borderTop: '1px solid #EBE6F2' }} />
           </Section>

@@ -22,7 +22,6 @@ function getResend(): Resend {
 
 const FROM       = process.env.RESEND_FROM ?? 'Mochipu Live2D <noreply@mochipuworks.com>';
 const SITE_URL   = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://forms.mochipuworks.com';
-const SNS_HANDLE = '@mochimochibubu';
 
 function formatSubmittedAt(dateStr: string): string {
   const d = new Date(dateStr);
@@ -144,15 +143,17 @@ export async function sendConfirmationEmails(confirmation: DeliveryConfirmation)
       from: FROM,
       to: confirmation.email,
       subject:
-        confirmation.locale === 'ja' ? `納品を確認いたしました — ${confirmation.commission_name}` :
-        confirmation.locale === 'zh' ? `收貨確認完成 — ${confirmation.commission_name}` :
-        `Delivery confirmed — ${confirmation.commission_name}`,
+        // Warmer, more personal subjects (the prior "Delivery confirmed"
+        // wording triggers Gmail's e-commerce/spam heuristics on a brand-new
+        // sender domain). Keep the commission name so threads still group.
+        confirmation.locale === 'ja' ? `ご確認ありがとうございました — ${confirmation.commission_name}` :
+        confirmation.locale === 'zh' ? `感謝您完成確認 — ${confirmation.commission_name}` :
+        `Thank you for your confirmation — ${confirmation.commission_name}`,
       react: React.createElement(ConfirmToClient, {
         commissionName: confirmation.commission_name,
         locale:         confirmation.locale,
         debutDate:      confirmation.debut_date,
         mochipuEmail:   MOCHIPU_EMAIL,
-        snsHandle:      SNS_HANDLE,
       }),
     }),
   ]);

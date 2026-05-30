@@ -1,6 +1,7 @@
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
+import Script from 'next/script';
 
 const locales = ['en', 'ja', 'zh'];
 
@@ -22,6 +23,13 @@ export default async function LocaleLayout({
         <NextIntlClientProvider messages={messages}>
           {children}
         </NextIntlClientProvider>
+        {/* Cloudflare Web Analytics — forms.mochipuworks.com */}
+        <Script
+          defer
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon='{"token": "91d9c1fa4cd04353b8acf3edc829f478"}'
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
